@@ -295,7 +295,7 @@
     </footer>
 
     <!-- Мобильное меню (простой JS) -->
-    <script>
+    <!-- <script>
       const menuBtn = document.getElementById("mobileMenuBtn");
       const navLinks = document.querySelector(".nav-links");
       if (menuBtn) {
@@ -303,6 +303,43 @@
           navLinks.classList.toggle("nav-links-open");
         });
       }
-    </script>
+    </script> -->
+
+    <script>
+  // Мобильное меню
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const navLinks = document.querySelector(".nav-links");
+
+  function closeMenu() {
+    navLinks.classList.remove("nav-links-open");
+  }
+
+  function toggleMenu() {
+    navLinks.classList.toggle("nav-links-open");
+  }
+
+  if (menuBtn) {
+    menuBtn.addEventListener("click", toggleMenu);
+  }
+
+  // Закрыть при скролле
+  window.addEventListener("scroll", function() {
+    if (navLinks && navLinks.classList.contains("nav-links-open")) {
+      closeMenu();
+    }
+  });
+
+  // Закрыть при клике на ссылку
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Закрыть при изменении размера окна (если стало широко)
+  window.addEventListener("resize", function() {
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+  });
+</script>
   </body>
 </html>
